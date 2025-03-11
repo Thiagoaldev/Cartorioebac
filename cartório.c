@@ -125,62 +125,79 @@ if(file == NULL)//cria o arquivo e o NULL é uma constante usada para representar
 	{
      printf("O usuário foi deletado!.\n");//informando que o usuáario foi deletado
      system("pause");//pausa a pagina exp. para ler ou selecionar alguma coisa
-	
-}
+	}
 
 }
+
 
 int main()//cria as variáveis
-{
-
-	 int opcao=0; //definindo variáveis
-	 int laco=1;//valor da variavel
-	
-	 for(laco=1;laco=1;)
-	{
-	
-
-	 system("cls");system("cls");//system("cls") chama uma linha de comando do sistema operacional que limpa a tela inteira 
-	 
-	 
+ {
     setlocale(LC_ALL, "portuguese"); //definindo a linguagem
+    
+    int opcao=0; //definindo variáveis
+    int laco=1;//valor da variavel	   
+	char senhadigitada[]="a";
+	int comparacao;
 	
-	 printf("### cartório da EBAC ###\n\n"); //inicio do menu
-	 printf("Escolha a opção desejada do menu:\n\n");
-	 printf("\t1 - Registrar nomes\n");
-	 printf("\t2 - Consultar nomes\n");
-	 printf("\t3 - Deletar nomes\n\n"); 
-	 printf("\t4 - Sair do sistema\n\n");
-	 printf("Opção:");//fim do menu
+	printf("### Cartório da EBAC ##\n\n");
+	printf("Login de administrador! \n\nDigite a sua senha: ");
+	scanf("%s",senhadigitada);
 	
-	 scanf("%d", &opcao); //armazenando a escolha do usuário
-	
-	 system("cls");//system("cls") chama uma linha de comando do sistema operacional que limpa a tela inteira 
-	
-	 switch(opcao)//variaveis
+	comparacao = strcmp(senhadigitada,"admin");
+	 
+	 if(comparacao == 0)
 	 {
-	     case 1:
-	     registro();
-	     break;
-	     
-	     case 2:
-	     consulta();
-	     break;
-	     
-	     case 3:
-	     deletar();
-	     break;
-	     
-	     case 4:
-	     printf("Obrigado por utilizar o sistema!\n");
-	     return 0;
-	     break;
-		 	
-	     default:
-	     printf("essa opção não está disponivel!\n");//para algum numero incorreto
-		 system("pause");
-		 break;
-	 }//fim da seleção
-	     	
-	 }
+	 
+	   
+	   for(laco=1;laco=1;)
+	   {
+	
+
+	    system("cls");system("cls");//system("cls") chama uma linha de comando do sistema operacional que limpa a tela inteira 
+	 
+	  
+        setlocale(LC_ALL, "portuguese"); //definindo a linguagem
+	
+	    printf("### cartório da EBAC ###\n\n"); //inicio do menu
+	    printf("Escolha a opção desejada do menu:\n\n");
+	    printf("\t1 - Registrar nomes\n");
+	    printf("\t2 - Consultar nomes\n");
+	    printf("\t3 - Deletar nomes\n\n"); 
+	    printf("\t4 - Sair do sistema\n\n");
+	    printf("Opção:");//fim do menu
+	 
+	    scanf("%d", &opcao); //armazenando a escolha do usuário
+	 
+	    system("cls");//system("cls") chama uma linha de comando do sistema operacional que limpa a tela inteira 
+	
+	   switch(opcao)//variaveis
+	     {
+	       case 1:
+	       registro();
+	       break;
+	      
+	       case 2:
+	       consulta();
+	       break;
+	      
+	       case 3:
+	       deletar();
+	       break;
+	      
+	       case 4:
+	       printf("Obrigado por utilizar o sistema!\n");
+	       return 0;
+	       break;
+		  	
+	       default:
+	       printf("essa opção não está disponivel!\n");//para algum numero incorreto
+		   system("pause");
+		   break;
+         }//fim da seleção
+     }  
+	  	
+	}
+	else
+	printf("senha incorreta!");
 }	
+    
