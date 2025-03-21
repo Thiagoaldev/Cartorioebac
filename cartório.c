@@ -12,7 +12,6 @@ int registro()//função responsavel por cadastrar os usuário no sistema
 	char cpf[40];
 	char nome[40];
 	char sobrenome[40];
-	char email[60];
 	char cargo[40];
 	//final criação de variáveis/string
 	
@@ -48,17 +47,6 @@ int registro()//função responsavel por cadastrar os usuário no sistema
 	
 	 file = fopen(arquivo,"a");//cria o arquivo o "a" representa a string
 	 fprintf(file,sobrenome);//salvo o arquivo da variavel
-	 fclose(file);// fecha o arquivo
-	
-	 file = fopen(arquivo,"a");//cria o arquivo o "a" representa a string
- 	 fprintf(file,",");//cria o arquivo
-	 fclose(file);// fecha o arquivo
-	
-	printf("Digite o email a ser cadastrado: ");//coletando informação do usuário
-	 scanf("%s",email);//%s refere-se a string
-	
-	 file = fopen(arquivo,"a");//cria o arquivo o "a" representa a string
-	 fprintf(file,email);//salvo o arquivo da variavel
 	 fclose(file);// fecha o arquivo
 	
 	 file = fopen(arquivo,"a");//cria o arquivo o "a" representa a string
@@ -103,6 +91,7 @@ int consulta()//função responsavel por consultar os usuário no sistema
 		printf("\n\n");
 	}
 	
+	fclose(file);
 	system("pause");//pausa a pagina exp. para ler ou selecionar alguma coisa
 	
 }
@@ -113,19 +102,35 @@ int deletar()//função responsavel por deletar os usuário no sistema
 	char cpf[40];
 	//final criação de variáveis/string
 	
-	 printf("Digite o CPF do usuário a ser deletado: ");//pedindo a informação para do usuário
+	 printf("Digite o CPF do usuário a ser deletado: ");
 	 scanf("%s",cpf);//%s refere-se a string
 	
-	 remove(cpf);//comando para deletar
+	 remove(cpf);
 	
-	 FILE *file;//cria o arquivo
-	 file = fopen(cpf,"r"); //abrindo o arquivo cpf com comando "r" para leitura
+	 FILE *file;
+	 file = fopen(cpf,"r"); 
 	
 if(file == NULL)//cria o arquivo e o NULL é uma constante usada para representar um ponteiro nulo, ou seja, um ponteiro que não aponta para nenhum endereço válido na memória.
 	{
-     printf("O usuário foi deletado!.\n");//informando que o usuáario foi deletado
-     system("pause");//pausa a pagina exp. para ler ou selecionar alguma coisa
+     printf("O usuário foi deletado!.\n");
+     system("pause");
 	}
+else
+	{
+		fclose(file);
+		remove(cpf);
+		FILE *file;	
+		file = fopen(cpf,"r");
+		if(file == NULL)
+		{
+			printf("Usuário deletado com sucesso!.\n");
+			system("pause");
+		}
+	}
+	fclose(file);
+
+
+
 
 }
 
@@ -133,45 +138,43 @@ if(file == NULL)//cria o arquivo e o NULL é uma constante usada para representar
 int main()//cria as variáveis
  {
     setlocale(LC_ALL, "portuguese"); //definindo a linguagem
-    
+     
     int opcao=0; //definindo variáveis
     int laco=1;//valor da variavel	   
-	char senhadigitada[]="a";
-	int comparacao;
+    char senhadigitada[]="a";
+    int comparacao;
 	
-	printf("### Cartório da EBAC ##\n\n");
-	printf("Login de administrador! \n\nDigite a sua senha: ");
-	scanf("%s",senhadigitada);
-	
+    printf("### Cartório da EBAC ##\n\n");
+    printf("Login de administrador! \n\nDigite a sua senha: ");
+    scanf("%s",senhadigitada);
+	 
 	comparacao = strcmp(senhadigitada,"admin");
+ 
+    if(comparacao == 0)
+	{
 	 
-	 if(comparacao == 0)
-	 {
-	 
-	   
+	   system("cls");
 	   for(laco=1;laco=1;)
 	   {
-	
-
-	    system("cls");system("cls");//system("cls") chama uma linha de comando do sistema operacional que limpa a tela inteira 
 	 
 	  
-        setlocale(LC_ALL, "portuguese"); //definindo a linguagem
-	
-	    printf("### cartório da EBAC ###\n\n"); //inicio do menu
-	    printf("Escolha a opção desejada do menu:\n\n");
-	    printf("\t1 - Registrar nomes\n");
-	    printf("\t2 - Consultar nomes\n");
-	    printf("\t3 - Deletar nomes\n\n"); 
-	    printf("\t4 - Sair do sistema\n\n");
-	    printf("Opção:");//fim do menu
+	   
+         setlocale(LC_ALL, "portuguese"); //definindo a linguagem
 	 
-	    scanf("%d", &opcao); //armazenando a escolha do usuário
-	 
-	    system("cls");//system("cls") chama uma linha de comando do sistema operacional que limpa a tela inteira 
+	     printf("### cartório da EBAC ###\n\n"); //inicio do menu
+	     printf("Escolha a opção desejada do menu:\n\n");
+	     printf("\t1 - Registrar nomes\n");
+	     printf("\t2 - Consultar nomes\n");
+	     printf("\t3 - Deletar nomes\n\n"); 
+	     printf("\t4 - Sair do sistema\n\n");
+	     printf("Opção:");//fim do menu
+	  
+	     scanf("%d", &opcao); //armazenando a escolha do usuário
+	  
+	     system("cls");//system("cls") chama uma linha de comando do sistema operacional que limpa a tela inteira 
 	
-	   switch(opcao)//variaveis
-	     {
+	     switch(opcao)//variaveis
+	      {
 	       case 1:
 	       registro();
 	       break;
@@ -193,9 +196,8 @@ int main()//cria as variáveis
 	       printf("essa opção não está disponivel!\n");//para algum numero incorreto
 		   system("pause");
 		   break;
-         }//fim da seleção
-     }  
-	  	
+          }//fim da seleção
+        }   	
 	}
 	else
 	printf("senha incorreta!");
